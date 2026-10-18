@@ -1,6 +1,6 @@
 # Project rules
 
-Canal weirs (Kalimantan peat · 01 of 11): a 1-D shallow-water solver for a canal
+Canal weirs (Water systems · 01 of 11): a 1-D shallow-water solver for a canal
 with overflow weirs, Python. Package in src/canalweir, tests in tests/,
 experiments in experiments/, results in results/.
 
@@ -8,7 +8,7 @@ experiments in experiments/, results in results/.
 - SI units everywhere: m, s, m^3/s. g = 9.81 m/s^2.
 - The canal in experiments/common.py (width 3 m, n = 0.03, slope 2e-4, discharges
   0.1 to 1.2 m^3/s, crests 0.5 to 1.5 m) is chosen for illustration, not measured.
-  Never present a result from it as a property of a real peat canal.
+  Never present a result from it as a property of a real canal.
 - Never change a test tolerance, a cell size, the CFL number, a steady-state tolerance,
   or a canal parameter without saying so in the commit message.
 - Never loosen a test to make it pass. Find the cause.
@@ -20,7 +20,7 @@ experiments in experiments/, results in results/.
 ## Commands
 Windows 11, PowerShell 7, conda (Miniforge). Commands are PowerShell.
 - Environment (once): conda env create -f environment.yml
-- Activate: conda activate peat01
+- Activate: conda activate water01
 - Install the package (once): python -m pip install --no-deps -e .
 - Tests: pytest
 - Experiment: python experiments/<name>.py (dam_break, steady_convergence, backwater, drawdown, weir_cascade)

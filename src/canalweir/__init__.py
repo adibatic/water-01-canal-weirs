@@ -1,1 +1,1 @@
-"""Canal weirs: a verified 1-D shallow-water solver for peatland canals."""
+"""Canal weirs: a verified 1-D shallow-water solver for canals with weirs."""

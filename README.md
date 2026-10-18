@@ -2,16 +2,16 @@
 
 # Canal weirs
 
-**How far upstream does an overflow weir raise a peatland canal,<br>and how does its outflow change as the level falls?**
+**How far upstream does an overflow weir raise a canal,<br>and how does its outflow change as the level falls?**
 
 A 1-D shallow-water solver, written from scratch and checked against exact answers.
 
-[![tests](https://github.com/adibatic/kalimantan-peat-01-canal-weirs/actions/workflows/tests.yml/badge.svg)](https://github.com/adibatic/kalimantan-peat-01-canal-weirs/actions/workflows/tests.yml)
+[![tests](https://github.com/adibatic/water-01-canal-weirs/actions/workflows/tests.yml/badge.svg)](https://github.com/adibatic/water-01-canal-weirs/actions/workflows/tests.yml)
 ![python](https://img.shields.io/badge/python-3.10%2B-3776ab)
 ![licence](https://img.shields.io/badge/licence-MIT-2a78d6)
-![series](https://img.shields.io/badge/kalimantan--peat-01%20of%2011-6b5444)
+![series](https://img.shields.io/badge/water%20systems-01%20of%2011-2a78d6)
 
-Kalimantan peat · **01 of 11** · next: 02 groundwater (coming)
+Water systems · **01 of 11** · next: 02 groundwater (coming)
 
 <img src="results/animations/weir_cascade.gif" alt="A 9 km canal with three weirs and without, through a storm and a dry spell. With weirs the canal keeps three pools; without, it drains." width="720">
 
@@ -30,7 +30,7 @@ In the illustrative canal (3 m wide, slope 0.2 m per km, Manning n = 0.03, all c
 3. **The level-pool estimate is good in the dry season and short in the wet season.** At 0.1 m³/s it is within 6 % of the computed backwater length. At 0.3 to 1.2 m³/s the water is raised 1.2 to 3.2 times farther than it predicts, because a flowing canal's surface is not flat.
 4. **As the level falls, the weir's outflow falls to zero at the crest; the open canal's does not.** After the inflow stops, a 4 km reach with a 1.0 m weir keeps 7,204 m³ after three days (the exact pool below the crest is 7,200 m³). Without the weir, the same reach keeps 14 m³.
 
-These are properties of a model canal. They say nothing about a real canal until it is surveyed (project 03) and the model is validated against field loggers (project 11).
+These are properties of a model canal. They say nothing about a real canal until the model is checked against measurements: project 03 measures a real subak divider in Bali, and project 06 builds the water-level loggers.
 
 ## Results at a glance
 
@@ -80,7 +80,7 @@ The dam break converges at order 1.00 (second-order scheme) and 0.71 (first orde
 <img src="results/figures/recession.png" width="62%" alt="Outflow and storage after the inflow stops, with and without a weir">
 </p>
 
-The open canal ends in critical flow, so its outflow falls with depth but only reaches zero when the canal is empty. The weir's outflow reaches zero at the crest. That is the feedback a drying peat surface provides on its own, rebuilt in the canal: the drier it gets, the less it loses.
+The open canal ends in critical flow, so its outflow falls with depth but only reaches zero when the canal is empty. The weir's outflow reaches zero at the crest. A weir works as a simple self-regulating valve: the lower the water, the less it lets out, and nothing below the crest.
 
 ## How it works
 
@@ -104,9 +104,9 @@ $$\frac{dh}{dx} = \frac{S_0 - S_f}{1 - q^2/(g h^3)}$$
 
 ## Scope and limits
 
-- 1-D, rectangular, prismatic canal. No seepage to or from the peat (project 02), no rain or evaporation on the canal.
+- 1-D, rectangular, prismatic canal. No seepage between the canal and the ground (groundwater is project 02), no rain or evaporation on the canal.
 - Weir: ideal broad-crested law, discharge coefficient 1, approach velocity neglected, free overflow only (a drowned weir is not modelled).
-- The canal, flows, crests and storm are chosen for illustration. Peat canals vary; every length here scales roughly with 1/slope.
+- The canal, flows, crests and storm are chosen for illustration. Real canals vary; every length here scales roughly with 1/slope.
 - Steady runs stop when |dh/dt| < 1e-8 m/s. In deep, slow pools the second-order residual stalls near 6e-9 m/s (the limiter switches on an almost flat surface); the backwater length has settled to 0.1 m long before.
 - Planned but not done: a code-to-code comparison with HEC-RAS.
 
@@ -124,17 +124,17 @@ The equations in the code name their source. ☐ means I have not yet checked th
 | ☐ | Harten, A., Lax, P. D., van Leer, B. (1983). On upstream differencing and Godunov-type schemes for hyperbolic conservation laws. *SIAM Review* 25(1). | HLL flux |
 | ☐ | Audusse, E., Bouchut, F., Bristeau, M.-O., Klein, R., Perthame, B. (2004). A fast and stable well-balanced scheme with hydrostatic reconstruction for shallow water flows. *SIAM J. Sci. Comput.* 25(6). | Hydrostatic reconstruction, first and second order |
 | ☐ | Toro, E. F. (2001). *Shock-Capturing Methods for Free-Surface Shallow Flows.* Wiley. | MUSCL reconstruction, minmod limiter, wave-speed estimates |
-| ☐ | Urzainki, I., et al. (2020). Canal blocking optimization in restoration of drained peatlands. *Biogeosciences* 17. | Context: block placement is already studied |
+| ☐ | Urzainki, I., et al. (2020). Canal blocking optimization in restoration of drained peatlands. *Biogeosciences* 17. | Context, not used in any equation: where to block canals in peatlands (the later Kalimantan track) |
 
 ## Reproduce
 
 With conda (Windows, Linux or macOS; the commands are the same in PowerShell and in bash):
 
 ```
-git clone https://github.com/adibatic/kalimantan-peat-01-canal-weirs.git
-cd kalimantan-peat-01-canal-weirs
+git clone https://github.com/adibatic/water-01-canal-weirs.git
+cd water-01-canal-weirs
 conda env create -f environment.yml
-conda activate peat01
+conda activate water01
 python -m pip install --no-deps -e .
 pytest                                        # 29 tests, about 15 s
 python experiments/dam_break.py               # seconds
@@ -150,7 +150,7 @@ Without conda, use `pip install -r requirements.txt` in any Python 3.10 to 3.14 
 ## Repository
 
 ```
-kalimantan-peat-01-canal-weirs/
+water-01-canal-weirs/
 ├── src/canalweir/
 │   ├── hydraulics.py       Manning, critical depth, weir law
 │   ├── exact.py            Ritter, manufactured steady flow, GVF profile, pool drawdown

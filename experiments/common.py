@@ -1,6 +1,6 @@
 """Shared settings for the experiments: the illustrative canal and the figure style.
 
-The canal values are chosen for illustration, not measured on a peat canal.
+The canal values are chosen for illustration, not measured on a real canal.
 Project 03 replaces them with surveyed values; every result here scales with them.
 """
 from __future__ import annotations

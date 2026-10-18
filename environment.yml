@@ -1,4 +1,4 @@
-name: peat01
+name: water01
 channels:
   - conda-forge
 dependencies:
